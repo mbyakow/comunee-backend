@@ -1,0 +1,31 @@
+---
+version: '3.5'
+
+services:
+  app:
+    build:
+      context: ./build/docker/app
+    volumes:
+      - ./app:/var/www:cached
+      - ./app/var/cache:/var/www/cache:delegated
+      - ./var/log:/var/log
+    working_dir: /var/www/public
+
+  webserver:
+    build:
+      context: ./build/docker/nginx
+    volumes:
+      - ./app:/var/www
+      - ./build/docker/nginx/conf.d/:/etc/nginx/conf.d/
+      - ./build/docker/logs/nginx:/var/log/nginx
+    depends_on:
+      - app
+    ports:
+      - "8550:80"
+
+  test:
+    build:
+      context: ./build/docker/app
+    volumes:
+      - ./app:/var/www:cached
+    working_dir: /var/www/public
