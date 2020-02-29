@@ -9,7 +9,7 @@ services:
       - ./app:/var/www:cached
       - ./app/var/cache:/var/www/cache:delegated
       - ./var/log:/var/log
-    working_dir: /var/www/public
+    working_dir: /var/www
 
   webserver:
     build:
@@ -28,4 +28,4 @@ services:
       context: ./build/docker/app
     volumes:
       - ./app:/var/www:cached
-    working_dir: /var/www/public
+    working_dir: /var/www
