@@ -12,6 +12,10 @@
         "symfony/yaml": "5.0.*"
     },
     "require-dev": {
+        "codeception/codeception": "^4.1",
+        "codeception/module-asserts": "^1.0.0",
+        "codeception/module-phpbrowser": "^1.0.0",
+        "codeception/module-symfony": "^1.0",
         "roave/security-advisories": "dev-master"
     },
     "config": {

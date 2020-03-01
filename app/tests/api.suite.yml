@@ -1,0 +1,9 @@
+actor: ApiTester
+modules:
+    config:
+        Symfony:
+            app_path: 'src'
+            environment: 'test'
+    enabled:
+        - Symfony
+        - \Helper\Api

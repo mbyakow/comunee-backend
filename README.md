@@ -3,7 +3,7 @@
 ## Overview
 
 * This project provides API for consumption.
-* This API powers Communie frontend, which is also an open source project.
+* This API powers Comunee frontend, which is also an open source project.
 
 ## Tech stack
 
