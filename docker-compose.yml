@@ -10,6 +10,8 @@ services:
       - ./app/var/cache:/var/www/cache:delegated
       - ./var/log:/var/log
     working_dir: /var/www
+    environment:
+      - PHP_XDEBUG_REMOTE_HOST=${PHP_XDEBUG_REMOTE_HOST}
 
   webserver:
     build:
@@ -29,3 +31,5 @@ services:
     volumes:
       - ./app:/var/www:cached
     working_dir: /var/www
+    environment:
+      - PHP_XDEBUG_REMOTE_HOST=${PHP_XDEBUG_REMOTE_HOST}
