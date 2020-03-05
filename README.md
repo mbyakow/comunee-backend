@@ -1,5 +1,7 @@
 # Comunee — backend
 
+![Build](https://github.com/mbyakow/comunee-backend/workflows/Build/badge.svg?branch=master)
+
 ## Overview
 
 * This project provides API for consumption.

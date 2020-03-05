@@ -1,4 +1,4 @@
-name: Comunee Backend CI
+name: Build
 
 on:
   push:
