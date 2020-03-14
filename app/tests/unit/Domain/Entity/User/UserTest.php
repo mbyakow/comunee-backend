@@ -11,21 +11,30 @@ use Codeception\Test\Unit;
 
 class UserTest extends Unit
 {
-    /**
-     * @param $id
-     * @param $email
-     * @param $userName
-     * @dataProvider correctValuesDataProvider
-     */
-    public function testCreateWithCorrectParamsShouldNotRaiseException($id, $email, $userName): void
+    public function testCreateShouldNotRaiseException(): void
     {
-        new User($id, $email, $userName);
+        new User(1, new Email('some@user.com'), new UserName('Some', 'User'));
     }
 
-    public function correctValuesDataProvider(): array
+    public function testChangeNameShouldAssignNewName(): void
     {
-        return [
-            [1, new Email('some@user.com'), new UserName('Some', 'User')],
-        ];
+        $initialUserName = new UserName('Some', 'User');
+        $newUserName = new UserName('John', 'Doe');
+        $user = new User(1, new Email('some@user.com'), $initialUserName);
+
+        $user->changeName($newUserName);
+
+        $this->assertEquals($user->getName(), $newUserName);
+    }
+
+    public function testChangeEmailShouldAssignNewEmail(): void
+    {
+        $initialEmail = new Email('some@user.com');
+        $newEmail = new Email('some@user.com');
+        $user = new User(1, $initialEmail, new UserName('Some', 'User'));
+
+        $user->changeEmail($newEmail);
+
+        $this->assertEquals($user->getEmail(), $newEmail);
     }
 }

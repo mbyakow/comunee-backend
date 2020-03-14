@@ -6,41 +6,42 @@ namespace App\Tests\unit\Domain\Entity\ValueObject;
 
 use App\Domain\Entity\ValueObject\Email;
 use Codeception\Test\Unit;
+use DomainException;
 
 class EmailTest extends Unit
 {
     /**
      * @param $value
-     * @dataProvider correctValuesDataProvider
+     * @dataProvider validValuesDataProvider
      */
-    public function testCreateWithCorrectValueShouldNotRaiseException($value): void
+    public function testCreateWithValidValueShouldNotRaiseException($value): void
     {
         new Email($value);
     }
 
     /**
      * @param $value
-     * @dataProvider incorrectValuesDataProvider
+     * @dataProvider invalidValuesDataProvider
      */
-    public function testCreateWithIncorrectValueShouldRaiseException($value): void
+    public function testCreateWithInvalidValueShouldRaiseException($value): void
     {
-        $this->expectException(\DomainException::class);
+        $this->expectException(DomainException::class);
 
         new Email($value);
     }
 
     /**
      * @param $value
-     * @dataProvider correctValuesDataProvider
+     * @dataProvider validValuesDataProvider
      */
-    public function testCreateShouldAssignCorrectValue($value): void
+    public function testCreateShouldAssignCorrectEmail($value): void
     {
         $email = new Email($value);
 
         $this->assertEquals($email, $value);
     }
 
-    public function correctValuesDataProvider(): array
+    public function validValuesDataProvider(): array
     {
         return [
             ['some@email.com'],
@@ -49,7 +50,7 @@ class EmailTest extends Unit
         ];
     }
 
-    public function incorrectValuesDataProvider(): array
+    public function invalidValuesDataProvider(): array
     {
         return [
             ['some@email'],

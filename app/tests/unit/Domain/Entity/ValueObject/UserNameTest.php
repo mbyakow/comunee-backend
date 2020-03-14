@@ -12,14 +12,14 @@ class UserNameTest extends Unit
     /**
      * @param $firstName
      * @param $lastName
-     * @dataProvider correctValuesDataProvider
+     * @dataProvider validValuesDataProvider
      */
-    public function testCreateWithCorrectParamsShouldNotRaiseException($firstName, $lastName): void
+    public function testCreateWithValidParamsShouldNotRaiseException($firstName, $lastName): void
     {
         new UserName($firstName, $lastName);
     }
 
-    public function correctValuesDataProvider(): array
+    public function validValuesDataProvider(): array
     {
         return [
             ['John', 'Doe'],
