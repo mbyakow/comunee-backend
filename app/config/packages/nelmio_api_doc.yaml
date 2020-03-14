@@ -4,6 +4,55 @@ nelmio_api_doc:
             title: Comunee — backend
             description:
             version: 1.0.0
-    areas: # to filter documented areas
+        definitions:
+            JsonResponseOk:
+                type: object
+                required:
+                    - message
+                    - data
+                properties:
+                    message:
+                        type: string
+                    data:
+                        type: object
+            JsonResponseError:
+                type: object
+                required:
+                    - message
+                    - errors
+                properties:
+                    message:
+                        type: string
+                    errors:
+                        type: array
+                        items:
+                            type: object
+                            required:
+                                - key
+                                - message
+                                - code
+                            properties:
+                                key:
+                                    type: string
+                                message:
+                                    type: string
+                                code:
+                                    type: string
+
+            JsonResponseException:
+                type: object
+                required:
+                    - message
+                    - exceptionMessage
+                properties:
+                    message:
+                        type: string
+                    exceptionMessage:
+                        type: string
+                    exceptionType:
+                        type: string
+                    stackTrace:
+                        type: object
+    areas:
         path_patterns:
-            - ^/api(?!/documentation$) # Accepts routes under /api except /api/doc
+            - ^/api(?!/documentation$)
