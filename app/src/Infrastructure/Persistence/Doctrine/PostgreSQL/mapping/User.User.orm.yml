@@ -1,0 +1,22 @@
+App\Domain\Entity\User\User:
+  type: entity
+  table: user
+  id:
+    id:
+      type: guid
+      generator:
+        strategy: NONE
+  fields:
+    createdAt:
+      type: datetime_immutable
+      nullable: false
+    updatedAt:
+      type: datetime_immutable
+      nullable: false
+  embedded:
+    email:
+      class: App\Domain\Entity\ValueObject\Email
+      columnPrefix: false
+    name:
+      class: App\Domain\Entity\ValueObject\UserName
+      columnPrefix: false

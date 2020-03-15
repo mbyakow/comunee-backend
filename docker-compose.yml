@@ -9,9 +9,25 @@ services:
       - ./app:/var/www:cached
       - ./app/var/cache:/var/www/cache:delegated
       - ./var/log:/var/log
+    depends_on:
+      - db
     working_dir: /var/www
     environment:
       - PHP_XDEBUG_REMOTE_HOST=${PHP_XDEBUG_REMOTE_HOST}
+
+  db:
+    build:
+      context: ./build/docker/postgres
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - ${DOCKER_COMPOSE_PORT_DB}:5432
+    environment:
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=db
 
   webserver:
     build:
@@ -23,7 +39,7 @@ services:
     depends_on:
       - app
     ports:
-      - "8550:80"
+      - ${DOCKER_COMPOSE_PORT_APP}:80
 
   test:
     build:
@@ -33,3 +49,6 @@ services:
     working_dir: /var/www
     environment:
       - PHP_XDEBUG_REMOTE_HOST=${PHP_XDEBUG_REMOTE_HOST}
+
+volumes:
+  db-data:
