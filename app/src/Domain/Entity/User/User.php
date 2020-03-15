@@ -6,6 +6,9 @@ namespace App\Domain\Entity\User;
 
 use App\Domain\Entity\ValueObject\Email;
 use App\Domain\Entity\ValueObject\UserName;
+use DateTimeImmutable;
+use DateTimeInterface;
+use Exception;
 
 class User
 {
@@ -18,17 +21,26 @@ class User
     /** @var UserName */
     private UserName $name;
 
+    /** @var DateTimeInterface */
+    private DateTimeInterface $createdAt;
+
+    /** @var DateTimeInterface */
+    private DateTimeInterface $updatedAt;
+
     /**
      * User constructor.
      * @param int $id
      * @param Email $email
      * @param UserName $name
+     * @throws Exception
      */
     public function __construct(int $id, Email $email, UserName $name)
     {
         $this->id = $id;
         $this->email = $email;
         $this->name = $name;
+        $this->createdAt = new DateTimeImmutable();
+        $this->updatedAt = new DateTimeImmutable();
     }
 
     /**
@@ -69,5 +81,21 @@ class User
     public function changeEmail(Email $email): void
     {
         $this->email = $email;
+    }
+
+    /**
+     * @return DateTimeInterface
+     */
+    public function getCreatedAt(): DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @return DateTimeInterface
+     */
+    public function getUpdatedAt(): DateTimeInterface
+    {
+        return $this->updatedAt;
     }
 }

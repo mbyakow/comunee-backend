@@ -8,8 +8,10 @@ RUN apt-get update && apt-get install -y \
         zip \
         libzip-dev \
         unzip \
+        libpq-dev \
     && pecl install xdebug-2.9.2 \
-    && docker-php-ext-install zip mysqli pdo_mysql \
+    && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
+    && docker-php-ext-install zip pdo pgsql pdo_pgsql \
     && docker-php-ext-enable xdebug
 
 # composer
