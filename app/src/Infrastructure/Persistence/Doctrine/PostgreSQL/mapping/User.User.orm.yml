@@ -1,9 +1,9 @@
 App\Domain\Entity\User\User:
   type: entity
-  table: user
+  table: "`user`"
   id:
     id:
-      type: guid
+      type: uuid
       generator:
         strategy: NONE
   fields:

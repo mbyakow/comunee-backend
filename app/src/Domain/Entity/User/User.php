@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace App\Domain\Entity\User;
 
 use App\Domain\Entity\ValueObject\Email;
+use App\Domain\Entity\ValueObject\Id;
 use App\Domain\Entity\ValueObject\UserName;
 use DateTimeImmutable;
 use DateTimeInterface;
-use Exception;
 
 class User
 {
-    /** @var int */
-    private int $id;
+    /** @var Id */
+    private Id $id;
 
     /** @var Email */
     private Email $email;
@@ -29,12 +29,11 @@ class User
 
     /**
      * User constructor.
-     * @param int $id
+     * @param Id $id
      * @param Email $email
      * @param UserName $name
-     * @throws Exception
      */
-    public function __construct(int $id, Email $email, UserName $name)
+    public function __construct(Id $id, Email $email, UserName $name)
     {
         $this->id = $id;
         $this->email = $email;
@@ -44,9 +43,9 @@ class User
     }
 
     /**
-     * @return int
+     * @return Id
      */
-    public function getId(): int
+    public function getId(): Id
     {
         return $this->id;
     }
