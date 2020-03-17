@@ -14,6 +14,8 @@ doctrine:
         dbname: '%env(resolve:DATABASE_NAME)%'
         port: '%env(resolve:DATABASE_PORT)%'
         server_version: '10.5'
+        types:
+            uuid: App\Infrastructure\Persistence\Doctrine\Type\UuidType
     orm:
         auto_generate_proxy_classes: true
         auto_mapping: true
