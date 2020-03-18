@@ -11,6 +11,8 @@
 
 * PHP 7.4
 * Symfony 5.0.5
+* PostgreSQL 10.5
+* Docker
 
 ## Quickstart
 
@@ -20,4 +22,5 @@
 
 ## Notes
 
-* The API runs on port 8550 by default.
+* The API runs on port `8550` by default. For customization use `DOCKER_COMPOSE_PORT_APP` variable in `.env` file located in project's root directory.
+* Documentation available on `http://localhost:<your-port>/api/documentation`
