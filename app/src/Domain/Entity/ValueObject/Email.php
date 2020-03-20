@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace App\Domain\Entity\ValueObject;
 
-class Email
+class Email implements \JsonSerializable
 {
+    /** @var string email */
     private string $email;
 
     /**
@@ -27,5 +28,13 @@ class Email
     public function __toString(): string
     {
         return $this->email;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function jsonSerialize()
+    {
+        return (string)$this;
     }
 }
