@@ -22,6 +22,11 @@ interface UserRepositoryInterface
     public function isExistsByEmail(Email $email): bool;
 
     /**
+     * @return User[]
+     */
+    public function getAll(): array;
+
+    /**
      * @param User $user
      */
     public function save(User $user): void;

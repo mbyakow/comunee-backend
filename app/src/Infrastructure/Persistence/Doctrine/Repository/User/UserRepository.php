@@ -58,4 +58,12 @@ class UserRepository extends ServiceEntityRepository implements UserRepositoryIn
             throw new RuntimeException($e->getMessage(), (int)$e->getCode(), $e);
         }
     }
+
+    /**
+     * @return User[]
+     */
+    public function getAll(): array
+    {
+        return $this->findAll();
+    }
 }
