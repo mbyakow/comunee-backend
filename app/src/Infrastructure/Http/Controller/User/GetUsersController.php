@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Infrastructure\Http\Controller\User;
 
 use App\Application\User\GetUsersServiceInterface;
+use App\Infrastructure\Http\Helper\ResponseFactory;
+use DomainException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Swagger\Annotations as SWG;
 
@@ -38,17 +38,9 @@ class GetUsersController extends AbstractController
         try {
             $users = $this->getUsersService->getUsers();
 
-            return JsonResponse::create([
-                'message' => '',
-                'data' => $users,
-            ]);
-        } catch (\DomainException $exception) {
-            return JsonResponse::create([
-                'message' => 'Validation error',
-                'errors' => [
-                    $exception->getMessage()
-                ],
-            ], Response::HTTP_BAD_REQUEST);
+            return ResponseFactory::createOkResponse($users);
+        } catch (DomainException $exception) {
+            return ResponseFactory::createErrorResponse($exception->getMessage(), 'Validation error');
         }
     }
 }
