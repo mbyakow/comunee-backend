@@ -9,9 +9,9 @@ use App\Application\RequestFormValidationHelper;
 use App\Application\User\AddUserServiceInterface;
 use App\Application\User\Assembler\AddUserDtoAssemblerInterface;
 use App\Infrastructure\Http\Controller\User\Form\AddUserForm;
+use App\Infrastructure\Http\Helper\ResponseFactory;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -63,27 +63,16 @@ class AddUserController extends AbstractController
         if (!$form->isValid()) {
             $errors = RequestFormValidationHelper::getFlatArrayErrors($form->createView());
 
-            return JsonResponse::create([
-                'message' => 'Validation error',
-                'errors' => $errors,
-            ], Response::HTTP_BAD_REQUEST);
+            return ResponseFactory::createErrorResponse($errors, 'Validation error');
         }
 
         try {
             $addUserDto = $this->addUserDtoAssembler->assemble($data);
             $this->addUserService->addUser($addUserDto);
         } catch (ValidationException $exception) {
-            return JsonResponse::create([
-                'message' => 'Validation error',
-                'errors' => [
-                    $exception->getMessage()
-                ],
-            ], Response::HTTP_BAD_REQUEST);
+            return ResponseFactory::createErrorResponse($exception->getMessage(), 'Validation error');
         }
 
-        return JsonResponse::create([
-            'message' => '',
-            'data' => [],
-        ]);
+        return ResponseFactory::createOkResponse();
     }
 }
