@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Infrastructure\Http\Controller\User;
 
 use App\Application\User\GetUsersServiceInterface;
-use App\Infrastructure\Http\Helper\ResponseFactory;
+use App\Infrastructure\Http\ResponseFactory;
 use DomainException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;

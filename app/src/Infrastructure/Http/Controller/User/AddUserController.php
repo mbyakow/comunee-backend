@@ -9,7 +9,7 @@ use App\Application\RequestFormValidationHelper;
 use App\Application\User\AddUserServiceInterface;
 use App\Application\User\Assembler\AddUserDtoAssemblerInterface;
 use App\Infrastructure\Http\Controller\User\Form\AddUserForm;
-use App\Infrastructure\Http\Helper\ResponseFactory;
+use App\Infrastructure\Http\ResponseFactory;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
