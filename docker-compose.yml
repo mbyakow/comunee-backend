@@ -46,9 +46,17 @@ services:
       context: ./build/docker/app
     volumes:
       - ./app:/var/www:cached
+    depends_on:
+      - db
     working_dir: /var/www
     environment:
+      - ENVIRONMENT=test
       - PHP_XDEBUG_REMOTE_HOST=${PHP_XDEBUG_REMOTE_HOST}
+      - DATABASE_USER=postgres
+      - DATABASE_PASSWORD=postgres
+      - DATABASE_NAME=db_test
+      - DATABASE_HOST=db
+      - DATABASE_PORT=5432
 
 volumes:
   db-data:

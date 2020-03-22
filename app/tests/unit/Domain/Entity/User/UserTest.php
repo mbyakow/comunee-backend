@@ -6,6 +6,7 @@ namespace App\Tests\unit\Domain\Entity\User;
 
 use App\Domain\Entity\User\User;
 use App\Domain\Entity\ValueObject\Email;
+use App\Domain\Entity\ValueObject\Id;
 use App\Domain\Entity\ValueObject\UserName;
 use Codeception\Test\Unit;
 
@@ -13,14 +14,14 @@ class UserTest extends Unit
 {
     public function testCreateShouldNotRaiseException(): void
     {
-        new User(1, new Email('some@user.com'), new UserName('Some', 'User'));
+        new User(new Id('abc'), new Email('some@user.com'), new UserName('Some', 'User'));
     }
 
     public function testChangeNameShouldAssignNewName(): void
     {
         $initialUserName = new UserName('Some', 'User');
         $newUserName = new UserName('John', 'Doe');
-        $user = new User(1, new Email('some@user.com'), $initialUserName);
+        $user = new User(new Id('abc'), new Email('some@user.com'), $initialUserName);
 
         $user->changeName($newUserName);
 
@@ -31,7 +32,7 @@ class UserTest extends Unit
     {
         $initialEmail = new Email('some@user.com');
         $newEmail = new Email('some@user.com');
-        $user = new User(1, $initialEmail, new UserName('Some', 'User'));
+        $user = new User(new Id('abc'), $initialEmail, new UserName('Some', 'User'));
 
         $user->changeEmail($newEmail);
 
