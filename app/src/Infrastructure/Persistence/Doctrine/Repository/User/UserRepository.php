@@ -47,6 +47,22 @@ class UserRepository extends ServiceEntityRepository implements UserRepositoryIn
     }
 
     /**
+     * @param Id $id
+     * @return User
+     */
+    public function get(Id $id): User
+    {
+        /** @var User $user */
+        $user = $this->find($id);
+
+        if ($user === null) {
+            throw new \DomainException(sprintf('User with id "%s" not found', $id));
+        }
+
+        return $user;
+    }
+
+    /**
      * @inheritDoc
      */
     public function save(User $user): void
