@@ -37,4 +37,13 @@ class Email implements \JsonSerializable
     {
         return (string)$this;
     }
+
+    /**
+     * @param Email $email
+     * @return bool
+     */
+    public function isEqual(Email $email): bool
+    {
+        return $this->email === $email;
+    }
 }

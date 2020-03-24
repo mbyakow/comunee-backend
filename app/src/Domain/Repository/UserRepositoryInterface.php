@@ -16,6 +16,12 @@ interface UserRepositoryInterface
     public function getNextIdentity(): Id;
 
     /**
+     * @param Id $id
+     * @return User
+     */
+    public function get(Id $id): User;
+
+    /**
      * @param Email $email
      * @return bool
      */

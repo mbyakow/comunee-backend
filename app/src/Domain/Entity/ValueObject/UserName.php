@@ -14,10 +14,10 @@ class UserName implements \JsonSerializable
 
     /**
      * UserName constructor.
-     * @param $firstName
-     * @param $lastName
+     * @param string $firstName
+     * @param string $lastName
      */
-    public function __construct($firstName, $lastName)
+    public function __construct(string $firstName, string $lastName)
     {
         $this->firstName = $firstName;
         $this->lastName = $lastName;
