@@ -10,6 +10,7 @@ use App\Application\User\UpdateUserServiceInterface;
 use App\Infrastructure\Http\Controller\User\Form\UpdateUserForm;
 use App\Infrastructure\Http\ResponseFactory;
 use DomainException;
+use Nelmio\ApiDocBundle\Annotation\Model;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -41,6 +42,12 @@ class UpdateUserController extends AbstractController
      * @Route("api/v1/user_update", methods={"POST"})
      *
      * @SWG\Tag(name="Users")
+     * @SWG\Parameter(
+     *     name="payload",
+     *     in="body",
+     *     required=true,
+     *     @SWG\Schema(ref=@Model(type=App\Application\User\Dto\UpdateUserDto::class)),
+     * ),
      *
      * @SWG\Response(response=200, description="OK")
      * @SWG\Response(response=400, description="Bad Request", @SWG\Schema(ref="#/definitions/JsonResponseError"))

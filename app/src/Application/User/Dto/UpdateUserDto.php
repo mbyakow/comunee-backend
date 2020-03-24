@@ -4,18 +4,43 @@ declare(strict_types=1);
 
 namespace App\Application\User\Dto;
 
-use App\Domain\Entity\ValueObject\Email;
-use App\Domain\Entity\ValueObject\Id;
-use App\Domain\Entity\ValueObject\UserName;
+use Swagger\Annotations as SWG;
 
 class UpdateUserDto
 {
-    /** @var Id */
-    public Id $id;
+    /**
+     * @var string
+     *
+     * @SWG\Property(
+     *     example="665ebda7-101b-4252-b025-d76875766c05",
+     * )
+     */
+    public string $id;
 
-    /** @var UserName */
-    public UserName $userName;
+    /**
+     * @var string
+     *
+     * @SWG\Property(
+     *     example="John",
+     * )
+     */
+    public string $firstName;
 
-    /** @var Email */
-    public Email $email;
+    /**
+     * @var string
+     *
+     * @SWG\Property(
+     *     example="Doe",
+     * )
+     */
+    public string $lastName;
+
+    /**
+     * @var string
+     *
+     * @SWG\Property(
+     *     example="john@doe.com",
+     * )
+     */
+    public string $email;
 }

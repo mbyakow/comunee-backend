@@ -7,6 +7,7 @@ namespace App\Infrastructure\Http\Controller\User;
 use App\Application\User\GetUsersServiceInterface;
 use App\Infrastructure\Http\ResponseFactory;
 use DomainException;
+use Nelmio\ApiDocBundle\Annotation\Model;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Swagger\Annotations as SWG;
@@ -30,7 +31,25 @@ class GetUsersController extends AbstractController
      *
      * @SWG\Tag(name="Users")
      *
-     * @SWG\Response(response=200, description="OK")
+     * @SWG\Response(
+     *     response=200,
+     *     description="OK",
+     *     @SWG\Schema(
+     *         type="object",
+     *         allOf={
+     *             @SWG\Schema(ref="#/definitions/JsonResponseOk"),
+     *             @SWG\Schema(
+     *                 @SWG\Property(
+     *                     property="data",
+     *                     type="array",
+     *                     @SWG\Items(
+     *                         ref=@Model(type=\App\Application\User\Dto\UserDto::class)
+     *                     )
+     *                 )
+     *             )
+     *         }
+     *     )
+     * )
      * @SWG\Response(response=400, description="Bad Request", @SWG\Schema(ref="#/definitions/JsonResponseError"))
      */
     public function __invoke()

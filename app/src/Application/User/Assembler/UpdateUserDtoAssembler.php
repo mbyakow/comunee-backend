@@ -18,9 +18,10 @@ class UpdateUserDtoAssembler implements UpdateUserDtoAssemblerInterface
     {
         $result = new UpdateUserDto();
 
-        $result->id = new Id($data['id']);
-        $result->email = new Email($data['email']);
-        $result->userName = new UserName($data['firstName'], $data['lastName']);
+        $result->id = $data['id'];
+        $result->email = $data['email'];
+        $result->firstName = $data['firstName'];
+        $result->lastName = $data['lastName'];
 
         return $result;
     }

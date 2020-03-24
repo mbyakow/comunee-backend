@@ -1,4 +1,6 @@
 nelmio_api_doc:
+    models:
+        use_jms: false
     documentation:
         info:
             title: Comunee — backend
