@@ -6,12 +6,15 @@
         "php": "^7.4",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "ext-json": "*",
         "doctrine/annotations": "^1.8",
         "friendsofsymfony/rest-bundle": "^3.0@dev",
         "jms/serializer-bundle": "^3.5@dev",
         "nelmio/api-doc-bundle": "^3.6",
+        "phpmd/phpmd": "dev-master",
         "ramsey/uuid": "^3.9",
         "sensio/framework-extra-bundle": "^5.5",
+        "squizlabs/php_codesniffer": "*",
         "symfony/asset": "5.0.*",
         "symfony/console": "5.0.*",
         "symfony/dotenv": "5.0.*",
@@ -21,8 +24,7 @@
         "symfony/orm-pack": "^1.0",
         "symfony/twig-pack": "^1.0",
         "symfony/validator": "5.0.*",
-        "symfony/yaml": "5.0.*",
-        "ext-json": "*"
+        "symfony/yaml": "5.0.*"
     },
     "require-dev": {
         "codeception/codeception": "^4.1",

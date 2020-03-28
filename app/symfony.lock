@@ -35,6 +35,9 @@
     "codeception/stub": {
         "version": "3.6.1"
     },
+    "composer/xdebug-handler": {
+        "version": "1.4.1"
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -246,6 +249,9 @@
     "ocramius/proxy-manager": {
         "version": "2.7.0"
     },
+    "pdepend/pdepend": {
+        "version": "2.x-dev"
+    },
     "phar-io/manifest": {
         "version": "1.0.3"
     },
@@ -263,6 +269,9 @@
     },
     "phpdocumentor/type-resolver": {
         "version": "1.1.0"
+    },
+    "phpmd/phpmd": {
+        "version": "dev-master"
     },
     "phpspec/prophecy": {
         "version": "v1.10.2"
@@ -370,6 +379,15 @@
         "files": [
             "config/packages/sensio_framework_extra.yaml"
         ]
+    },
+    "squizlabs/php_codesniffer": {
+        "version": "3.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "3.0",
+            "ref": "0dc9cceda799fd3a08b96987e176a261028a3709"
+        }
     },
     "symfony/asset": {
         "version": "v5.0.5"
