@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\unit\Domain\Entity\User;
 
 use App\Domain\Entity\User\User;
+use App\Domain\Entity\User\ValueObject\Status;
 use App\Domain\Entity\ValueObject\Email;
 use App\Domain\Entity\ValueObject\Id;
 use App\Domain\Entity\ValueObject\UserName;
@@ -37,5 +38,14 @@ class UserTest extends Unit
         $user->changeEmail($newEmail);
 
         $this->assertEquals($user->getEmail(), $newEmail);
+    }
+
+    public function testDeactivateShouldChangeUserStatus(): void
+    {
+        $user = new User(new Id('abc'), new Email('some@user.com'), new UserName('Some', 'User'));
+
+        $user->deactivate();
+
+        $this->assertEquals($user->getStatus(), new Status(Status::INACTIVE));
     }
 }

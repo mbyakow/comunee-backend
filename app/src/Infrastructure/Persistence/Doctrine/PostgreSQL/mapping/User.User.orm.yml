@@ -20,3 +20,6 @@ App\Domain\Entity\User\User:
     name:
       class: App\Domain\Entity\ValueObject\UserName
       columnPrefix: false
+    status:
+      class: App\Domain\Entity\User\ValueObject\Status
+      columnPrefix: false

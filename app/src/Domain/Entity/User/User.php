@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Entity\User;
 
+use App\Domain\Entity\User\ValueObject\Status;
 use App\Domain\Entity\ValueObject\Email;
 use App\Domain\Entity\ValueObject\Id;
 use App\Domain\Entity\ValueObject\UserName;
@@ -20,6 +21,9 @@ class User
 
     /** @var UserName */
     private UserName $name;
+
+    /** @var Status */
+    private Status $status;
 
     /** @var DateTimeInterface */
     private DateTimeInterface $createdAt;
@@ -38,6 +42,7 @@ class User
         $this->id = $id;
         $this->email = $email;
         $this->name = $name;
+        $this->status = new Status(Status::ACTIVE);
         $this->createdAt = new DateTimeImmutable();
         $this->updatedAt = new DateTimeImmutable();
     }
@@ -96,5 +101,18 @@ class User
     public function getUpdatedAt(): DateTimeInterface
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * @return Status
+     */
+    public function getStatus(): Status
+    {
+        return $this->status;
+    }
+
+    public function deactivate(): void
+    {
+        $this->status = new Status(Status::INACTIVE);
     }
 }
