@@ -13,4 +13,5 @@ modules:
             timeout: 60
     enabled:
         - Symfony
+        - Doctrine2
         - \Helper\Api

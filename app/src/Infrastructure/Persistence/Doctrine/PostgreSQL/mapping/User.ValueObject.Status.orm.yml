@@ -1,0 +1,7 @@
+App\Domain\Entity\User\ValueObject\Status:
+  type: embeddable
+  fields:
+    status:
+      type: integer
+      options:
+        default: 1
