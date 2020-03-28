@@ -30,6 +30,7 @@
         "codeception/module-doctrine2": "dev-master",
         "codeception/module-phpbrowser": "^1.0.0",
         "codeception/module-symfony": "^1.0",
+        "doctrine/doctrine-fixtures-bundle": "^3.3@dev",
         "roave/security-advisories": "dev-master",
         "symfony/maker-bundle": "^1.14"
     },
