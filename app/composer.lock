@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "722576a1c1c5bfefa01f3cde8c926058",
+    "content-hash": "f0900978637ca1eac0c584d9f2ed30c9",
     "packages": [
         {
             "name": "composer/xdebug-handler",
@@ -6898,12 +6898,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "cc260638d814f7b71aa060742ff041e50802b22a"
+                "reference": "77b423caf31a35f0285be898e3a74fea7d867629"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/cc260638d814f7b71aa060742ff041e50802b22a",
-                "reference": "cc260638d814f7b71aa060742ff041e50802b22a",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/77b423caf31a35f0285be898e3a74fea7d867629",
+                "reference": "77b423caf31a35f0285be898e3a74fea7d867629",
                 "shasum": ""
             },
             "require": {
@@ -6974,7 +6974,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-03-30T13:10:24+00:00"
+            "time": "2020-03-31T06:42:17+00:00"
         },
         {
             "name": "webimpress/safe-writer",
