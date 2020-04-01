@@ -8,6 +8,7 @@ use App\Domain\Entity\User\User;
 use App\Domain\Entity\ValueObject\Email;
 use App\Domain\Entity\ValueObject\Id;
 use App\Domain\Repository\UserRepositoryInterface;
+use App\Domain\Service\User\Criteria\UserSearchCriteria;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -81,5 +82,22 @@ class UserRepository extends ServiceEntityRepository implements UserRepositoryIn
     public function getAll(): array
     {
         return $this->findAll();
+    }
+
+    /**
+     * @param UserSearchCriteria $userSearchCriteria
+     * @return User[]
+     */
+    public function findByCriteria(UserSearchCriteria $userSearchCriteria): array
+    {
+        $query = $this->createQueryBuilder('user');
+
+        if ($userSearchCriteria->name !== null) {
+            $query
+                ->andWhere('user.name.firstName LIKE :name OR user.name.lastName LIKE :name')
+                ->setParameter('name', '%' . $userSearchCriteria->name . '%');
+        }
+
+        return $query->getQuery()->getResult();
     }
 }

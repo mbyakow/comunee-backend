@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Http\Controller\User;
 
+use App\Application\RequestFormValidationHelper;
 use App\Application\User\GetUsersServiceInterface;
+use App\Infrastructure\Http\Controller\User\Form\GetUsersForm;
 use App\Infrastructure\Http\ResponseFactory;
 use DomainException;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Swagger\Annotations as SWG;
 
@@ -27,9 +30,15 @@ class GetUsersController extends AbstractController
     }
 
     /**
-     * @Route("api/v1/users_get-list", methods={"GET"})
+     * @Route("api/v1/users_get-list", methods={"POST"})
      *
      * @SWG\Tag(name="Users")
+     * @SWG\Parameter(
+     *     name="payload",
+     *     in="body",
+     *     required=true,
+     *     @SWG\Schema(ref=@Model(type=App\Application\User\Dto\UpdateUserDto::class)),
+     * ),
      *
      * @SWG\Response(
      *     response=200,
@@ -52,8 +61,17 @@ class GetUsersController extends AbstractController
      * )
      * @SWG\Response(response=400, description="Bad Request", @SWG\Schema(ref="#/definitions/JsonResponseError"))
      */
-    public function __invoke()
+    public function __invoke(Request $request)
     {
+        $data = $request->request->all();
+        $form = $this->createForm(GetUsersForm::class)->submit($data);
+
+        if (!$form->isValid()) {
+            $errors = RequestFormValidationHelper::getFlatArrayErrors($form->createView());
+
+            return ResponseFactory::createErrorResponse($errors, 'Validation error');
+        }
+
         try {
             $users = $this->getUsersService->getUsers();
 
