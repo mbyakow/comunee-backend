@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Infrastructure\Http\Controller\User;
 
 use App\Application\RequestFormValidationHelper;
+use App\Application\User\Assembler\GetUsersDtoAssemblerInterface;
 use App\Application\User\GetUsersServiceInterface;
 use App\Infrastructure\Http\Controller\User\Form\GetUsersForm;
 use App\Infrastructure\Http\ResponseFactory;
@@ -20,13 +21,21 @@ class GetUsersController extends AbstractController
     /** @var GetUsersServiceInterface */
     private GetUsersServiceInterface $getUsersService;
 
+    /** @var GetUsersDtoAssemblerInterface */
+    private GetUsersDtoAssemblerInterface $getUsersDtoAssembler;
+
     /**
      * GetUsersController constructor.
      * @param GetUsersServiceInterface $getUsersService
+     * @param GetUsersDtoAssemblerInterface $getUsersDtoAssembler
      */
-    public function __construct(GetUsersServiceInterface $getUsersService)
+    public function __construct(
+        GetUsersServiceInterface $getUsersService,
+        GetUsersDtoAssemblerInterface $getUsersDtoAssembler
+    )
     {
         $this->getUsersService = $getUsersService;
+        $this->getUsersDtoAssembler = $getUsersDtoAssembler;
     }
 
     /**
@@ -73,7 +82,9 @@ class GetUsersController extends AbstractController
         }
 
         try {
-            $users = $this->getUsersService->getUsers();
+            $getUsersDto = $this->getUsersDtoAssembler->assemble($data);
+
+            $users = $this->getUsersService->getUsers($getUsersDto);
 
             return ResponseFactory::createOkResponse($users);
         } catch (DomainException $exception) {

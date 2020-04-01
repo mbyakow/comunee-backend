@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Infrastructure\Persistence\Doctrine\Repository\User;
 
 use App\Domain\Entity\User\User;
+use App\Domain\Entity\User\ValueObject\Status;
 use App\Domain\Entity\ValueObject\Email;
 use App\Domain\Entity\ValueObject\Id;
 use App\Domain\Repository\UserRepositoryInterface;
@@ -94,9 +95,11 @@ class UserRepository extends ServiceEntityRepository implements UserRepositoryIn
 
         if ($userSearchCriteria->name !== null) {
             $query
-                ->andWhere('user.name.firstName LIKE :name OR user.name.lastName LIKE :name')
-                ->setParameter('name', '%' . $userSearchCriteria->name . '%');
+                ->andWhere('LOWER(user.name.firstName) LIKE :name OR LOWER(user.name.lastName) LIKE :name')
+                ->setParameter('name', '%' . strtolower($userSearchCriteria->name) . '%');
         }
+
+        $query->andWhere('user.status.status = :status')->setParameter('status', Status::ACTIVE);
 
         return $query->getQuery()->getResult();
     }

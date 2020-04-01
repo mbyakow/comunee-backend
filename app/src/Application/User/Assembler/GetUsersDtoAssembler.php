@@ -13,6 +13,10 @@ class GetUsersDtoAssembler implements GetUsersDtoAssemblerInterface
      */
     public function assemble(array $data): GetUsersDto
     {
-        // TODO: Implement assemble() method.
+        $result = new GetUsersDto();
+
+        $result->name = $data['name'] ?? '';
+
+        return $result;
     }
 }

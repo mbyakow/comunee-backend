@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Application\User;
 
 use App\Application\User\Assembler\UserDtoAssemblerInterface;
+use App\Application\User\Dto\GetUsersDto;
 use App\Domain\Entity\User\User;
 use App\Domain\Repository\UserRepositoryInterface;
 use App\Domain\Service\User\Criteria\UserSearchCriteria;
@@ -31,10 +32,10 @@ class GetUsersService implements GetUsersServiceInterface
     /**
      * @inheritDoc
      */
-    public function getUsers(): array
+    public function getUsers(GetUsersDto $getUsersDto): array
     {
         $searchCriteria = new UserSearchCriteria();
-        $searchCriteria->name = 'Max';
+        $searchCriteria->name = $getUsersDto->name;
 
         $users = $this->userRepository->findByCriteria($searchCriteria);
 
