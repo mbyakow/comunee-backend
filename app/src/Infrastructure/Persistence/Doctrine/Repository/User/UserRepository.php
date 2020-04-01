@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace App\Infrastructure\Persistence\Doctrine\Repository\User;
 
 use App\Domain\Entity\User\User;
+use App\Domain\Entity\User\ValueObject\Status;
 use App\Domain\Entity\ValueObject\Email;
 use App\Domain\Entity\ValueObject\Id;
 use App\Domain\Repository\UserRepositoryInterface;
+use App\Domain\Service\User\Criteria\UserSearchCriteria;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -81,5 +83,24 @@ class UserRepository extends ServiceEntityRepository implements UserRepositoryIn
     public function getAll(): array
     {
         return $this->findAll();
+    }
+
+    /**
+     * @param UserSearchCriteria $userSearchCriteria
+     * @return User[]
+     */
+    public function findByCriteria(UserSearchCriteria $userSearchCriteria): array
+    {
+        $query = $this->createQueryBuilder('user');
+
+        if ($userSearchCriteria->name !== null) {
+            $query
+                ->andWhere('LOWER(user.name.firstName) LIKE :name OR LOWER(user.name.lastName) LIKE :name')
+                ->setParameter('name', '%' . strtolower($userSearchCriteria->name) . '%');
+        }
+
+        $query->andWhere('user.status.status = :status')->setParameter('status', Status::ACTIVE);
+
+        return $query->getQuery()->getResult();
     }
 }

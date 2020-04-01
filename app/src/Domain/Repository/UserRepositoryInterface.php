@@ -7,6 +7,7 @@ namespace App\Domain\Repository;
 use App\Domain\Entity\User\User;
 use App\Domain\Entity\ValueObject\Email;
 use App\Domain\Entity\ValueObject\Id;
+use App\Domain\Service\User\Criteria\UserSearchCriteria;
 
 interface UserRepositoryInterface
 {
@@ -36,4 +37,10 @@ interface UserRepositoryInterface
      * @param User $user
      */
     public function save(User $user): void;
+
+    /**
+     * @param UserSearchCriteria $userSearchCriteria
+     * @return User[]
+     */
+    public function findByCriteria(UserSearchCriteria $userSearchCriteria): array;
 }
