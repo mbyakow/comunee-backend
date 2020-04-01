@@ -46,7 +46,7 @@ class GetUsersController extends AbstractController
      *     name="payload",
      *     in="body",
      *     required=true,
-     *     @SWG\Schema(ref=@Model(type=App\Application\User\Dto\UpdateUserDto::class)),
+     *     @SWG\Schema(ref=@Model(type=App\Application\User\Dto\GetUsersDto::class)),
      * ),
      *
      * @SWG\Response(
